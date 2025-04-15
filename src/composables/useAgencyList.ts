@@ -6,10 +6,12 @@ import notify from "devextreme/ui/notify";
 import * as ExcelJS from "exceljs";
 import { saveAs } from "file-saver";
 import type { ValueChangedEvent as DxValueChangedEvent } from "devextreme/ui/text_box";
+import { useRouter } from "vue-router";
 
 export const useAgencyList = () => {
   const agencyStore = useAgencyStore();
   const { loading, agencyData, originalAgencyData, filters } = storeToRefs(agencyStore);
+  const router = useRouter();
 
   // DataGrid reference
   const dataGrid = ref<{ instance: unknown } | null>(null);
@@ -107,7 +109,7 @@ export const useAgencyList = () => {
     button.classList.add("rounded-full", "p-2", "hover:bg-gray-100", "transition");
     button.innerHTML =
       '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>';
-    button.addEventListener("click", () => viewDetails(cellInfo.data));
+    button.addEventListener("click", () => navigateToEmployees(cellInfo.data));
     cellElement.appendChild(button);
   };
 
@@ -128,6 +130,11 @@ export const useAgencyList = () => {
       type: "info",
       displayTime: 2000,
     });
+  };
+
+  // Navigate to employees view
+  const navigateToEmployees = (data: AgencyData) => {
+    router.push(`/agency/${data.id}`);
   };
 
   // Print grid
@@ -266,5 +273,6 @@ export const useAgencyList = () => {
     printGrid,
     onExportToExcel,
     isFiltered: filters,
+    navigateToEmployees,
   };
 };
