@@ -1,21 +1,6 @@
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-
-// Define employee data type
-interface EmployeeData {
-  id: number;
-  employee_name: string;
-  identification_number: string;
-  date_time_get_to_work: string;
-  date_time_out_of_office: string;
-  date_time_reenter_office: string;
-  date_time_back_to_work: string;
-  status_presence: string;
-  type_noncompliance: string;
-  agencyId: number;
-  agencyName: string;
-  integrationStatus?: string;
-}
+import type { EmployeeData } from "@/types/employees";
 
 export const useAgencyEmployees = () => {
   const route = useRoute();
@@ -26,16 +11,16 @@ export const useAgencyEmployees = () => {
   const dataGrid = ref<{ instance: unknown } | null>(null);
   const agencyName = ref<string>("");
 
-  // Sample employee data - in a real app this would come from an API
+  
   const sampleEmployeeData: EmployeeData[] = [
     {
       id: 1,
       employee_name: "John Doe",
       identification_number: "EMP001",
-      date_time_get_to_work: "2024-04-04 08:00",
-      date_time_out_of_office: "2024-04-04 17:00",
-      date_time_reenter_office: "2024-04-04 13:00",
-      date_time_back_to_work: "2024-04-04 14:00",
+      date_time_get_to_work: "2025-04-04 08:00",
+      date_time_out_of_office: "2025-04-04 17:00",
+      date_time_reenter_office: "2025-04-04 13:00",
+      date_time_back_to_work: "2025-04-04 14:00",
       status_presence: "Present",
       type_noncompliance: "None",
       agencyId: 1,
@@ -46,10 +31,10 @@ export const useAgencyEmployees = () => {
       id: 2,
       employee_name: "Jane Smith",
       identification_number: "EMP002",
-      date_time_get_to_work: "2024-04-04 08:30",
-      date_time_out_of_office: "2024-04-04 17:30",
-      date_time_reenter_office: "2024-04-04 12:30",
-      date_time_back_to_work: "2024-04-04 13:30",
+      date_time_get_to_work: "2025-04-04 08:30",
+      date_time_out_of_office: "2025-04-04 17:30",
+      date_time_reenter_office: "2025-04-04 12:30",
+      date_time_back_to_work: "2025-04-04 13:30",
       status_presence: "Present",
       type_noncompliance: "None",
       agencyId: 1,
@@ -60,10 +45,10 @@ export const useAgencyEmployees = () => {
       id: 3,
       employee_name: "Bob Johnson",
       identification_number: "EMP003",
-      date_time_get_to_work: "2024-04-04 09:00",
-      date_time_out_of_office: "2024-04-04 16:00",
-      date_time_reenter_office: "2024-04-04 12:00",
-      date_time_back_to_work: "2024-04-04 13:00",
+      date_time_get_to_work: "2025-04-04 09:00",
+      date_time_out_of_office: "2025-04-04 16:00",
+      date_time_reenter_office: "2025-04-04 12:00",
+      date_time_back_to_work: "2025-04-04 13:00",
       status_presence: "Late",
       type_noncompliance: "Tardiness",
       agencyId: 1,
@@ -74,10 +59,10 @@ export const useAgencyEmployees = () => {
       id: 4,
       employee_name: "Sarah Williams",
       identification_number: "EMP004",
-      date_time_get_to_work: "2024-04-04 08:15",
-      date_time_out_of_office: "2024-04-04 16:45",
-      date_time_reenter_office: "2024-04-04 12:15",
-      date_time_back_to_work: "2024-04-04 13:15",
+      date_time_get_to_work: "2025-04-04 08:15",
+      date_time_out_of_office: "2025-04-04 16:45",
+      date_time_reenter_office: "2025-04-04 12:15",
+      date_time_back_to_work: "2025-04-04 13:15",
       status_presence: "Present",
       type_noncompliance: "None",
       agencyId: 2,
@@ -88,10 +73,10 @@ export const useAgencyEmployees = () => {
       id: 5,
       employee_name: "Michael Brown",
       identification_number: "EMP005",
-      date_time_get_to_work: "2024-04-04 08:45",
-      date_time_out_of_office: "2024-04-04 17:15",
-      date_time_reenter_office: "2024-04-04 12:45",
-      date_time_back_to_work: "2024-04-04 13:45",
+      date_time_get_to_work: "2025-04-04 08:45",
+      date_time_out_of_office: "2025-04-04 17:15",
+      date_time_reenter_office: "2025-04-04 12:45",
+      date_time_back_to_work: "2025-04-04 13:45",
       status_presence: "Absent",
       type_noncompliance: "Absence",
       agencyId: 2,
@@ -102,10 +87,10 @@ export const useAgencyEmployees = () => {
       id: 6,
       employee_name: "Emily Davis",
       identification_number: "EMP006",
-      date_time_get_to_work: "2024-04-04 08:05",
-      date_time_out_of_office: "2024-04-04 16:55",
-      date_time_reenter_office: "2024-04-04 12:05",
-      date_time_back_to_work: "2024-04-04 13:05",
+      date_time_get_to_work: "2025-04-04 08:05",
+      date_time_out_of_office: "2025-04-04 16:55",
+      date_time_reenter_office: "2025-04-04 12:05",
+      date_time_back_to_work: "2025-04-04 13:05",
       status_presence: "Present",
       type_noncompliance: "None",
       agencyId: 3,
@@ -116,10 +101,10 @@ export const useAgencyEmployees = () => {
       id: 7,
       employee_name: "David Miller",
       identification_number: "EMP007",
-      date_time_get_to_work: "2024-04-04 08:20",
-      date_time_out_of_office: "2024-04-04 17:10",
-      date_time_reenter_office: "2024-04-04 12:20",
-      date_time_back_to_work: "2024-04-04 13:20",
+      date_time_get_to_work: "2025-04-04 08:20",
+      date_time_out_of_office: "2025-04-04 17:10",
+      date_time_reenter_office: "2025-04-04 12:20",
+      date_time_back_to_work: "2025-04-04 13:20",
       status_presence: "Present",
       type_noncompliance: "None",
       agencyId: 3,
@@ -130,10 +115,10 @@ export const useAgencyEmployees = () => {
       id: 8,
       employee_name: "Jessica Wilson",
       identification_number: "EMP008",
-      date_time_get_to_work: "2024-04-04 09:30",
-      date_time_out_of_office: "2024-04-04 17:45",
-      date_time_reenter_office: "2024-04-04 12:30",
-      date_time_back_to_work: "2024-04-04 13:30",
+      date_time_get_to_work: "2025-04-04 09:30",
+      date_time_out_of_office: "2025-04-04 17:45",
+      date_time_reenter_office: "2025-04-04 12:30",
+      date_time_back_to_work: "2025-04-04 13:30",
       status_presence: "Late",
       type_noncompliance: "Tardiness",
       agencyId: 4,
@@ -144,10 +129,10 @@ export const useAgencyEmployees = () => {
       id: 9,
       employee_name: "Andrew Taylor",
       identification_number: "EMP009",
-      date_time_get_to_work: "2024-04-04 08:10",
-      date_time_out_of_office: "2024-04-04 16:50",
-      date_time_reenter_office: "2024-04-04 12:10",
-      date_time_back_to_work: "2024-04-04 13:10",
+      date_time_get_to_work: "2025-04-04 08:10",
+      date_time_out_of_office: "2025-04-04 16:50",
+      date_time_reenter_office: "2025-04-04 12:10",
+      date_time_back_to_work: "2025-04-04 13:10",
       status_presence: "Present",
       type_noncompliance: "None",
       agencyId: 5,
@@ -158,10 +143,10 @@ export const useAgencyEmployees = () => {
       id: 10,
       employee_name: "Zayed Khan",
       identification_number: "EMP010",
-      date_time_get_to_work: "2024-04-04 08:00",
-      date_time_out_of_office: "2024-04-04 16:55",
-      date_time_reenter_office: "2024-04-04 13:10",
-      date_time_back_to_work: "2024-04-04 13:30",
+      date_time_get_to_work: "2025-04-04 08:00",
+      date_time_out_of_office: "2025-04-04 16:55",
+      date_time_reenter_office: "2025-04-04 13:10",
+      date_time_back_to_work: "2025-04-04 13:30",
       status_presence: "Present",
       type_noncompliance: "None",
       agencyId: 6,
@@ -173,7 +158,7 @@ export const useAgencyEmployees = () => {
   onMounted(() => {
     loading.value = true;
 
-    // In a real app, this would be an API call using the agencyId from the route
+  
     setTimeout(() => {
       const filteredData = sampleEmployeeData.filter((employee) => employee.agencyId === agencyId);
 
@@ -184,7 +169,7 @@ export const useAgencyEmployees = () => {
       employees.value = filteredData;
       filteredEmployees.value = filteredData;
       loading.value = false;
-    }, 500); // Simulated API delay
+    }, 500); //  delay
   });
 
   // Status cell template with colored badges

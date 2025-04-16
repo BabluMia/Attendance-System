@@ -257,6 +257,9 @@ import type { ValueChangedEvent } from "devextreme/ui/text_box";
 // Define the DataGrid type
 import type DataGrid from "devextreme/ui/data_grid";
 
+// Import EmployeeData type from the composable
+import type { EmployeeData } from "../../../../../types/employees";
+
 // Excel export types
 interface ExcelWorksheet {
   worksheet: string;
@@ -266,22 +269,6 @@ interface ExcelWorksheet {
 interface ExcelExportWorkbook {
   fileName: string;
   worksheets: ExcelWorksheet[];
-}
-
-// Define employee data type
-interface EmployeeData {
-  id: number;
-  employee_name: string;
-  identification_number: string;
-  date_time_get_to_work: string;
-  date_time_out_of_office: string;
-  date_time_reenter_office: string;
-  date_time_back_to_work: string;
-  status_presence: string;
-  type_noncompliance: string;
-  agencyId: number;
-  agencyName: string;
-  integrationStatus?: string;
 }
 
 // Use the composable to get all the functionality
