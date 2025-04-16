@@ -134,7 +134,7 @@ export const useAgencyList = () => {
 
   // Navigate to employees view
   const navigateToEmployees = (data: AgencyData) => {
-    router.push(`/agency/${data.id}`);
+    router.push(`/attendence/${data.id}`);
   };
 
   // Print grid

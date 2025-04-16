@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import AgencyList from "../components/AgencyList.vue";
+import AgencySearch from "../components/AgencySearch.vue";
+</script>
+
 <template>
-  <div class="container">
-    <h1>Test 02</h1>
-  </div>
+  <AgencySearch />
+  <AgencyList />
 </template>

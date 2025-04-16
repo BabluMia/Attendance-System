@@ -164,6 +164,9 @@
           :visible="true"
           :show-page-size-selector="true"
           :allowed-page-sizes="[5, 10, 20]"
+          :show-info="true"
+          :display-mode="'full'"
+          position="bottom"
         />
       </DxDataGrid>
     </div>
