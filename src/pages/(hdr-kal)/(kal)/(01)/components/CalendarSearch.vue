@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <div class="border border-gray-300 rounded-lg p-6">
-      <h2 class="text-lg font-semibold mb-6">Calendar Settings Search 3</h2>
+      <h2 class="text-lg font-semibold mb-6">Calendar Settings Search </h2>
 
       <DxForm id="search-form" :formData="formData">
         <DxSimpleItem

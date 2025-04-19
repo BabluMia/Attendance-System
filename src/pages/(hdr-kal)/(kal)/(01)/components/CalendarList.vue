@@ -140,7 +140,7 @@
 
         <template #actionTemplate="{ data }">
           <div class="flex space-x-2 justify-center">
-            <button
+            <!-- <button
               class="text-blue-600 hover:text-blue-800"
               @click="onViewCalendar(data.data)"
               title="View"
@@ -165,7 +165,7 @@
                   d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                 />
               </svg>
-            </button>
+            </button> -->
             <button
               class="text-green-600 hover:text-green-800"
               @click="onEditCalendar(data.data)"
@@ -408,7 +408,7 @@ const onExportToExcel = () => {
 
 const onAddCalendar = () => {
   // Navigate to the calendar form page for creating a new calendar
-  router.push("/create-calender");
+  router.push("/calender/create");
 };
 
 // Event type definitions
@@ -439,14 +439,14 @@ const onCategoryCellClick = (e: CellClickEvent) => {
   }
 };
 
-const onViewCalendar = (calendar: CalendarForm) => {
-  // Navigate to the calendar form for editing
-  router.push(`/components/${calendar.id}`);
-};
+// const onViewCalendar = (calendar: CalendarForm) => {
+//   // Navigate to the calendar form for editing
+//   router.push(`/calender/${calendar.id}`);
+// };
 
 const onEditCalendar = (calendar: CalendarForm) => {
   // Navigate to the calendar form for editing
-  router.push(`/components/${calendar.id}`);
+  router.push(`/calender/${calendar.id}`);
 };
 
 // Modify resetFilters to use the store's resetFilter method
