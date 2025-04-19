@@ -5,142 +5,125 @@
         {{ $route.params.id ? "Edit Calendar Settings" : "Create Calendar Settings" }}
       </h2>
 
-      <DxForm :formData="formData" :colCount="2">
-        <DxSimpleItem
-          dataField="calendarName"
-          editorType="dxTextBox"
-          :label="{ text: 'Calendar Name' }"
-        />
-        <DxSimpleItem
-          dataField="calendarCategoryId"
-          editorType="dxSelectBox"
-          :editorOptions="{ items: calendarCategoryOptions, displayExpr: 'name', valueExpr: 'id' }"
-          :label="{ text: 'Calendar Category' }"
-        />
+      <DxForm :formData="formData" :colCount="1">
+  <!-- Calendar Info Section -->
+  <DxGroupItem caption="Calendar Information" :colCount="2">
+    <DxSimpleItem
+      dataField="calendarName"
+      editorType="dxTextBox"
+      :label="{ text: 'Calendar Name' }"
+    />
+    <DxSimpleItem
+      dataField="calendarCategoryId"
+      editorType="dxSelectBox"
+      :editorOptions="{ items: calendarCategoryOptions, displayExpr: 'name', valueExpr: 'id' }"
+      :label="{ text: 'Calendar Category' }"
+    />
+    <DxSimpleItem
+      dataField="calendarGroupId"
+      editorType="dxSelectBox"
+      :editorOptions="{
+        items: groupOptions,
+        displayExpr: 'name',
+        valueExpr: 'id',
+      }"
+      :label="{ text: 'Calendar Group' }"
+    />
+    <DxSimpleItem
+      dataField="shiftTypeId"
+      editorType="dxSelectBox"
+      :editorOptions="{ items: shiftTypeOptions, displayExpr: 'name', valueExpr: 'id' }"
+      :label="{ text: 'Shift Type' }"
+    />
+  </DxGroupItem>
 
-        <DxSimpleItem
-          dataField="calendarGroupId"
-          editorType="dxSelectBox"
-          :editorOptions="{
-            items: groupOptions,
-            displayExpr: 'name',
-            valueExpr: 'id',
-          }"
-          :label="{ text: 'Calendar Group' }"
-        />
+  <!-- Rest Break Section -->
+  <DxGroupItem caption="Rest Break" :colCount="2">
+    <DxSimpleItem :label="{ text: 'Start Date' }">
+      <DxDateBox v-model="formData.restBreak.startDate" type="date" displayFormat="yyyy-MM-dd" />
+    </DxSimpleItem>
+    <DxSimpleItem :label="{ text: 'End Date' }">
+      <DxDateBox v-model="formData.restBreak.endDate" type="date" displayFormat="yyyy-MM-dd" />
+    </DxSimpleItem>
+  </DxGroupItem>
 
-        <DxSimpleItem
-          dataField="shiftTypeId"
-          editorType="dxSelectBox"
-          :editorOptions="{ items: shiftTypeOptions, displayExpr: 'name', valueExpr: 'id' }"
-          :label="{ text: 'Shift Type' }"
-        />
+  <!-- Term Breaks in New Row -->
+  <DxGroupItem caption="Term Breaks" :colCount="2">
+    <DxGroupItem>
+      <DxSimpleItem :label="{ text: formData.termBreaks[0].title + ' Start Date' }">
+        <DxDateBox v-model="formData.termBreaks[0].startDate" type="date" displayFormat="yyyy-MM-dd" />
+      </DxSimpleItem>
+      <DxSimpleItem :label="{ text: formData.termBreaks[0].title + ' End Date' }">
+        <DxDateBox v-model="formData.termBreaks[0].endDate" type="date" displayFormat="yyyy-MM-dd" />
+      </DxSimpleItem>
+    </DxGroupItem>
+    <DxGroupItem>
+      <DxSimpleItem :label="{ text: formData.termBreaks[1].title + ' Start Date' }">
+        <DxDateBox v-model="formData.termBreaks[1].startDate" type="date" displayFormat="yyyy-MM-dd" />
+      </DxSimpleItem>
+      <DxSimpleItem :label="{ text: formData.termBreaks[1].title + ' End Date' }">
+        <DxDateBox v-model="formData.termBreaks[1].endDate" type="date" displayFormat="yyyy-MM-dd" />
+      </DxSimpleItem>
+    </DxGroupItem>
+  </DxGroupItem>
 
-        <!-- Rest Break -->
-        <DxSimpleItem :label="{ text: 'Rest Break Start Date' }">
-          <DxDateBox
-            v-model="formData.restBreak.startDate"
-            type="date"
-            displayFormat="yyyy-MM-dd"
-          />
+  <!-- Holiday Events in New Row -->
+  <DxGroupItem caption="Holiday Events" :colCount="1">
+    <template v-for="(event, index) in formData.holidayEvents" :key="index">
+      <DxGroupItem :colCount="2">
+        <DxSimpleItem :label="{ text: event.title }">
+          <DxDateBox v-model="event.date" type="date" displayFormat="yyyy-MM-dd" />
         </DxSimpleItem>
-        <DxSimpleItem :label="{ text: 'Rest Break End Date' }">
-          <DxDateBox v-model="formData.restBreak.endDate" type="date" displayFormat="yyyy-MM-dd" />
-        </DxSimpleItem>
+      </DxGroupItem>
+    </template>
+  </DxGroupItem>
 
-        <!-- Term Break -->
-        <DxGroupItem caption="Term Breaks" :colCount="1">
-          <DxGroupItem :colCount="2">
-            <DxSimpleItem :label="{ text: formData.termBreaks[0].title + ' Start Date' }">
-              <DxDateBox
-                v-model="formData.termBreaks[0].startDate"
-                type="date"
-                displayFormat="yyyy-MM-dd"
-              />
-            </DxSimpleItem>
-            <DxSimpleItem :label="{ text: formData.termBreaks[0].title + ' End Date' }">
-              <DxDateBox
-                v-model="formData.termBreaks[0].endDate"
-                type="date"
-                displayFormat="yyyy-MM-dd"
-              />
-            </DxSimpleItem>
-          </DxGroupItem>
-          <DxGroupItem :colCount="2">
-            <DxSimpleItem :label="{ text: formData.termBreaks[1].title + ' Start Date' }">
-              <DxDateBox
-                v-model="formData.termBreaks[1].startDate"
-                type="date"
-                displayFormat="yyyy-MM-dd"
-              />
-            </DxSimpleItem>
-            <DxSimpleItem :label="{ text: formData.termBreaks[1].title + ' End Date' }">
-              <DxDateBox
-                v-model="formData.termBreaks[1].endDate"
-                type="date"
-                displayFormat="yyyy-MM-dd"
-              />
-            </DxSimpleItem>
-          </DxGroupItem>
-        </DxGroupItem>
+  <!-- Weekly Days -->
+  <DxSimpleItem
+    dataField="weeklyRestDay"
+    editorType="dxSelectBox"
+    :editorOptions="{ items: weekDays, displayExpr: 'name', valueExpr: 'id' }"
+    :label="{ text: 'Weekly Rest Day' }"
+  />
+  <DxSimpleItem
+    dataField="weeklyHoliday"
+    editorType="dxSelectBox"
+    :editorOptions="{ items: weekDays, displayExpr: 'name', valueExpr: 'id' }"
+    :label="{ text: 'Weekly Holiday' }"
+  />
 
-        <!-- Holiday Events -->
-        <DxGroupItem caption="Holiday Events" :colCount="1">
-          <template v-for="(event, index) in formData.holidayEvents" :key="index">
-            <DxGroupItem :colCount="2">
-              <DxSimpleItem :label="{ text: event.title }">
-                <DxDateBox v-model="event.date" type="date" displayFormat="yyyy-MM-dd" />
-              </DxSimpleItem>
-            </DxGroupItem>
-          </template>
-        </DxGroupItem>
+  <!-- State and Agency Selectors -->
+  <DxSimpleItem :label="{ text: 'States' }">
+    <div class="flex items-center">
+      <span class="mr-2">{{ selectedStateIds.length }} selected</span>
+      <DxButton text="Select States" @click="openStatePopup = true" />
+    </div>
+  </DxSimpleItem>
 
-        <!-- Weekly Settings -->
-        <DxSimpleItem
-          dataField="weeklyRestDay"
-          editorType="dxSelectBox"
-          :editorOptions="{ items: weekDays, displayExpr: 'name', valueExpr: 'id' }"
-          :label="{ text: 'Weekly Rest Day' }"
-        />
-        <DxSimpleItem
-          dataField="weeklyHoliday"
-          editorType="dxSelectBox"
-          :editorOptions="{ items: weekDays, displayExpr: 'name', valueExpr: 'id' }"
-          :label="{ text: 'Weekly Holiday' }"
-        />
+  <DxSimpleItem :label="{ text: 'Agencies' }">
+    <div class="flex items-center">
+      <span class="mr-2">{{ selectedAgencyIds.length }} selected</span>
+      <DxButton text="Select Agencies" @click="openAgencyPopup = true" />
+    </div>
+  </DxSimpleItem>
 
-        <!-- Multi Select Popups -->
-        <DxSimpleItem :label="{ text: 'States' }">
-          <div class="flex items-center">
-            <span class="mr-2">{{ selectedStateIds.length }} selected</span>
-            <DxButton text="Select States" @click="openStatePopup = true" />
-          </div>
-        </DxSimpleItem>
+  <!-- Special Holiday Toggle -->
+  <DxSimpleItem
+    dataField="isSpecialHoliday"
+    editorType="dxCheckBox"
+    :label="{ text: 'Is Special Holiday?' }"
+  />
+  <DxSimpleItem
+    v-if="formData.isSpecialHoliday"
+    :label="{ text: 'Special Holiday Agencies' }"
+  >
+    <div class="flex items-center">
+      <span class="mr-2">{{ specialHolidayAgencyIds.length }} selected</span>
+      <DxButton text="Select Special Agencies" @click="openSpecialAgencyPopup = true" />
+    </div>
+  </DxSimpleItem>
+</DxForm>
 
-        <DxSimpleItem :label="{ text: 'Agencies' }">
-          <div class="flex items-center">
-            <span class="mr-2">{{ selectedAgencyIds.length }} selected</span>
-            <DxButton text="Select Agencies" @click="openAgencyPopup = true" />
-          </div>
-        </DxSimpleItem>
-
-        <DxSimpleItem
-          dataField="isSpecialHoliday"
-          editorType="dxCheckBox"
-          :label="{ text: 'Is Special Holiday?' }"
-        />
-
-        <!-- Special Holiday Agencies (conditionally shown) -->
-        <DxSimpleItem
-          v-if="formData.isSpecialHoliday"
-          :label="{ text: 'Special Holiday Agencies' }"
-        >
-          <div class="flex items-center">
-            <span class="mr-2">{{ specialHolidayAgencyIds.length }} selected</span>
-            <DxButton text="Select Special Agencies" @click="openSpecialAgencyPopup = true" />
-          </div>
-        </DxSimpleItem>
-      </DxForm>
     </div>
 
     <!-- Popups for multi-select components -->
