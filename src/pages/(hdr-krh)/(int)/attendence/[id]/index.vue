@@ -98,7 +98,7 @@
       >
         <DxSearchPanel :visible="false" />
         <DxHeaderFilter :visible="true" />
-        <DxSelection mode="multiple" />
+        <DxSelection mode="multiple" show-check-boxes-mode="always" />
         <DxScrolling mode="standard" />
         <DxPaging :enabled="true" :page-size="20" />
         <DxPager
@@ -109,7 +109,6 @@
           :display-mode="'full'"
           position="bottom"
         />
-        <DxSelection mode="multiple" show-check-boxes-mode="always" />
         <DxColumn type="selection" :width="40" />
 
         <DxColumn data-field="employee_name" caption="Name" :width="180" />
@@ -133,7 +132,10 @@
       </DxDataGrid>
 
       <!-- Review Status Section -->
-      <div v-if="selectedEmployees.length > 0" class="mt-6 border border-gray-300 rounded-lg p-4">
+      <div
+        v-if="selectedEmployees.length > 0"
+        class="overflow-x-hidden mt-6 border border-gray-300 rounded-lg p-4"
+      >
         <h3 class="text-lg font-medium mb-4">Review Status</h3>
 
         <div class="gap-6">
@@ -153,18 +155,18 @@
 
         <div class="flex justify-end mt-4 gap-3">
           <DxButton
-            icon="undo"
-            text="Return"
-            type="normal"
-            stylingMode="outlined"
-            @click="goBack"
-          />
-          <DxButton
             icon="save"
             text="Save"
             type="default"
             stylingMode="contained"
             @click="handleSave"
+          />
+          <DxButton
+            icon="undo"
+            text="Return"
+            type="normal"
+            stylingMode="outlined"
+            @click="goBack"
           />
         </div>
       </div>
@@ -253,6 +255,7 @@ import { useAgencyEmployees } from "@/composables/useAgencyEmployees";
 import { ref } from "vue";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import type { ValueChangedEvent } from "devextreme/ui/text_box";
+import type { ExcelExportDataGridProps } from "devextreme/excel_exporter";
 
 // Define the DataGrid type
 import type DataGrid from "devextreme/ui/data_grid";
@@ -300,7 +303,7 @@ const statusCellTemplate = (cellElement: HTMLElement, cellInfo: { data: Employee
   `;
 };
 const statusIntCellTemplate = (cellElement: HTMLElement, cellInfo: { data: EmployeeData }) => {
-  const status = cellInfo.data.integrationStatus;
+  const status = cellInfo.data.integrationStatus || "Unknown";
   let className = "";
 
   switch (status) {
@@ -310,7 +313,6 @@ const statusIntCellTemplate = (cellElement: HTMLElement, cellInfo: { data: Emplo
     case "Failed":
       className = "bg-yellow-100 text-yellow-800";
       break;
-
     default:
       className = "bg-gray-100 text-gray-800";
   }
@@ -414,8 +416,8 @@ const onExportToExcel = () => {
       ],
     };
 
-    // Type assertion needed since DevExtreme types don't match exactly
-    exportDataGrid(workbook as unknown as object);
+    // Using proper typing for exportDataGrid
+    exportDataGrid(workbook as unknown as ExcelExportDataGridProps);
   }
 };
 
