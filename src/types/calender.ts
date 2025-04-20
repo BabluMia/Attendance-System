@@ -48,3 +48,16 @@ export type Option = {
   id: number | string;
   name: string;
 };
+
+export type DeterminationItem = {
+  id: number;
+  name: string;
+  field: string;
+  isActive: boolean;
+};
+
+export interface PublicHoliday {
+  name: string;
+  date: string;
+  dayName: string;
+}

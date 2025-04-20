@@ -1,5 +1,11 @@
 // data.ts
-import type { Option, CalendarForm, ShiftTypeTimeRange } from "../../types/calender";
+import type {
+  Option,
+  CalendarForm,
+  ShiftTypeTimeRange,
+  DeterminationItem,
+  PublicHoliday,
+} from "../../types/calender";
 
 export const calendarCategoryOptions: Option[] = [
   { id: 1, name: "NON-OFFICE WORKING HOURS" },
@@ -28,7 +34,7 @@ export const holidayList: Option[] = [
   { id: 103, name: "Eid al-Fitr" },
 ];
 
-export const malaysianPublicHolidays: { name: string; date: string; dayName: string }[] = [
+export const malaysianPublicHolidays: PublicHoliday[] = [
   { name: "New Year's Day", date: "2025-01-01", dayName: "Wednesday" },
   { name: "Federal Territory Day", date: "2025-02-01", dayName: "Saturday" },
   { name: "Chinese New Year", date: "2025-01-25", dayName: "Saturday" },
@@ -446,4 +452,16 @@ export const calendars: CalendarForm[] = [
     isSpecialHoliday: true,
     specialHolidayAgencyIds: [4],
   },
+];
+
+export const determinationItems: DeterminationItem[] = [
+  { id: 1, name: "Rest Break", field: "restBreak", isActive: true },
+  { id: 2, name: "General Holidays", field: "generalHolidays", isActive: true },
+  { id: 3, name: "Term Break", field: "termBreaks", isActive: true },
+  { id: 4, name: "Holiday Events", field: "holidayEvents", isActive: true },
+  { id: 5, name: "Weekly Rest Day", field: "weeklyRestDay", isActive: true },
+  { id: 6, name: "Weekly Holiday", field: "weeklyHoliday", isActive: true },
+  { id: 7, name: "State Selection", field: "selectedStateIds", isActive: true },
+  { id: 8, name: "Agency Selection", field: "selectedAgencyIds", isActive: true },
+  { id: 9, name: "Special Holiday", field: "isSpecialHoliday", isActive: false },
 ];
